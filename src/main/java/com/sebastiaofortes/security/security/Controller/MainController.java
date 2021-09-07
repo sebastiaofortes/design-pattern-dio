@@ -1,8 +1,11 @@
 package com.sebastiaofortes.security.security.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +31,7 @@ public class MainController {
 	    // @RequestParam means it is a parameter from the GET or POST request
 
 	    Usuarios n = new Usuarios();
-	    n.setNome(name);
+	    n.setLogin(name);
 	    n.setEmail(email);
 	    userRepository.save(n);
 	    return "Dados salvos com sucesso!";
@@ -41,8 +44,8 @@ public class MainController {
 	    // @RequestParam means it is a parameter from the GET or POST request
 
 	    Usuarios n = new Usuarios();
-	    n.setNome("sebastiao");
-	    n.setEmail("fortes4");
+	    n.setLogin(name);
+	    n.setEmail(email);
 	    userRepository.save(n);
 	    return "Saved";
 	  }
@@ -51,11 +54,33 @@ public class MainController {
 	public String index() {
 
 	    Usuarios n = new Usuarios();
-	    n.setNome("sebastiao");
+	    n.setLogin("sebastiao");
 	    n.setEmail("fortes4");
 	    userRepository.save(n);
 		
 		return "testesql";
+	}
+	
+	@RequestMapping("/listando")
+	public String listando(ModelMap model) {
+
+		List<Usuarios> lista = (List<Usuarios>) userRepository.findAll();
+		int numres = (lista.size());
+		String textres = Integer.toString(numres);
+		model.addAttribute("numeroresultados", textres);
+		model.addAttribute("usuarios", lista);
+		return "listando";
+	}
+	
+	@RequestMapping("/listando2")
+	public String listando2(ModelMap model) {
+
+		List<Usuarios> lista = (List<Usuarios>) userRepository.findAll();
+		int numres = (lista.size());
+		String textres = Integer.toString(numres);
+		model.addAttribute("numeroresultados", textres);
+		model.addAttribute("usuarios", lista);
+		return "listando2";
 	}
 	
 	@RequestMapping("/teste-sql-get")
@@ -82,5 +107,19 @@ public class MainController {
 	public String home() {
 
 		return "home";
+	}
+	
+	@RequestMapping("/exibindo")
+	public String exibindo(ModelMap model) {
+
+		   model.addAttribute("nomeDoAtributo", "Informção vinda do código java");
+		return "exibindo";
+	}
+	
+	@RequestMapping("/recebendo")
+	public String recebendo(ModelMap model, @RequestParam String valor) {
+
+		   model.addAttribute("nomeDoAtributo", valor);
+		return "recebendo";
 	}
 }
