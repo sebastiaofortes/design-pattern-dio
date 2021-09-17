@@ -1,6 +1,9 @@
 package com.sebastiaofortes.security.security.Controller;
 
+import java.util.Enumeration;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
@@ -120,6 +123,22 @@ public class MainController {
 	public String recebendo(ModelMap model, @RequestParam String valor) {
 
 		   model.addAttribute("nomeDoAtributo", valor);
+		   
 		return "recebendo";
+	}
+	
+	
+	@RequestMapping("/sessoes")
+	public String sessoes(HttpSession session) {
+	Enumeration <String> enumeration =	session.getAttributeNames();
+	
+	while(enumeration.hasMoreElements()){
+		String nome = enumeration.nextElement();
+		System.out.println("*******Nome do atributo: "+nome);
+		System.out.println("*******Conteúdo do atributo: "+session.getAttribute(nome));
+	}
+	
+	
+		return "sessoes"; 
 	}
 }

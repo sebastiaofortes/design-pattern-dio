@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -33,8 +35,16 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
 	  
 	  @Override
 	  public void configure(AuthenticationManagerBuilder builder) throws Exception {
-	    builder
-	    .userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder()); // a autenticção será usando uma implemetacão da interface userDetailsService
+	   
+		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+		authenticationProvider.setUserDetailsService(userDetailsService);
+		authenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder());
+		builder.authenticationProvider(authenticationProvider);
+		// ***************** ou *************************
+	   // DaoAuthenticationConfigurer  DaConfigurer = builder.userDetailsService(userDetailsService);
+	    // DaConfigurer.passwordEncoder(new BCryptPasswordEncoder());
+	    // ***************** ou **************************
+	  // .userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder()); // a autenticção será usando uma implemetacão da interface userDetailsService
 	   // o método passwordEncoder acima é obrigatório e é usado para defnir a criptografia.
 	    
 	  }
