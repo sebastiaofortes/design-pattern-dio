@@ -1,6 +1,7 @@
 package com.sebastiaofortes.security.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import org.springframework.http.HttpMethod;
@@ -14,6 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import Service.ImplementsUserDetailService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
@@ -21,6 +24,10 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private ImplementsUserDetailService userDetailsService;
 	
+	@Bean
+	public ImplementsUserDetailService userDetailsService() {
+		return new ImplementsUserDetailService();
+	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{

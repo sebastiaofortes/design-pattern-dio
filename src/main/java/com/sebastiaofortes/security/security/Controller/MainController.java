@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sebastiaofortes.security.security.Usuariorepository;
 import com.sebastiaofortes.security.security.Model.Usuarios;
+import com.sebastiaofortes.security.security.Repository.Usuariorepository;
 
 
 

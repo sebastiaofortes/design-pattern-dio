@@ -1,4 +1,4 @@
-package com.sebastiaofortes.security.security;
+package Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import com.sebastiaofortes.security.security.Model.Usuarios;
+import com.sebastiaofortes.security.security.Repository.Usuariorepository;
 
 @Repository
 public class ImplementsUserDetailService implements UserDetailsService{

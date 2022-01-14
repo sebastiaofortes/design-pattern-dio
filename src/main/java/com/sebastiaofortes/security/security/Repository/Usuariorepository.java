@@ -1,6 +1,7 @@
-package com.sebastiaofortes.security.security;
+package com.sebastiaofortes.security.security.Repository;
 
 import com.sebastiaofortes.security.security.Model.Usuarios;
+
 
 import org.springframework.data.repository.CrudRepository;
 
